@@ -10,7 +10,7 @@ $result1 = mysqli_query($koneksi, "SELECT * FROM account a INNER JOIN karyawan b
 $data1 = mysqli_fetch_array($result1);
 $id1 = $data1['id_karyawan'];
 $jabatan_valid = $data1['jabatan'];
-if ($jabatan_valid == 'Admin') {
+if ($jabatan_valid == 'Kasir') {
 } else {
     header("Location: logout.php");
     exit;
@@ -20,9 +20,27 @@ $data = mysqli_fetch_array($result);
 $nama = $data['nama_karyawan'];
 $foto_profile = $data['foto_profile'];
 
+//script format tanggal
+function formattanggal($date){
+        
+
+  $newDate = date(" d F Y", strtotime($date));
+  switch(date("l"))
+{
+  case 'Monday':$nmh="Senin";break; 
+  case 'Tuesday':$nmh="Selasa";break; 
+  case 'Wednesday':$nmh="Rabu";break; 
+  case 'Thursday':$nmh="Kamis";break; 
+  case 'Friday':$nmh="Jum'at";break; 
+  case 'Saturday':$nmh="Sabtu";break; 
+  case 'Sunday':$nmh="minggu";break; 
+}
+echo " $newDate";
+ }
+
 //sql data konten
 
-$table = mysqli_query($koneksi, "SELECT * FROM tindakan");
+$table = mysqli_query($koneksi, "SELECT * FROM pasien");
 
 
 ?>
@@ -37,7 +55,7 @@ $table = mysqli_query($koneksi, "SELECT * FROM tindakan");
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Data Tindakan</title>
+    <title>Data Pasien</title>
 
     <!-- Custom fonts for this template-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet" type="text/css">
@@ -63,64 +81,51 @@ $table = mysqli_query($koneksi, "SELECT * FROM tindakan");
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Sidebar -->
-        <ul class="navbar-nav  sidebar sidebar-dark accordion" style=" background-color: #300030" id="accordionSidebar">
+       <!-- Sidebar -->
+       <ul class="navbar-nav  sidebar sidebar-dark accordion" style=" background-color: #300030" id="accordionSidebar">
 
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="DsAdmin">
-                <div class="sidebar-brand-icon rotate-n-15">
+<!-- Sidebar - Brand -->
+<a class="sidebar-brand d-flex align-items-center justify-content-center" href="DsKasir">
+    <div class="sidebar-brand-icon rotate-n-15">
 
-                </div>
-                <div class="sidebar-brand-text mx-3"> <img style="margin-top: 50px; max-height: 55px; width: 100%;" src="../gambar/Logo Klinik.jpeg"></div>
-            </a>
-            <br>
+    </div>
+    <div class="sidebar-brand-text mx-3"> <img style="margin-top: 50px; max-height: 55px; width: 100%;" src="../gambar/Logo Klinik.jpeg"></div>
+</a>
+<br>
 
-            <br>
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+<br>
+<!-- Divider -->
+<hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="DsAdmin">
-                    <i class="fas fa-fw fa-tachometer-alt" style="font-size: clamp(5px, 3vw, 15px);"></i>
-                    <span style="font-size: clamp(5px, 3vw, 15px);">Dashboard</span></a>
-            </li>
+<!-- Nav Item - Dashboard -->
+<li class="nav-item active">
+    <a class="nav-link" href="DsKasir">
+        <i class="fas fa-fw fa-tachometer-alt" style="font-size: clamp(5px, 3vw, 15px);"></i>
+        <span style="font-size: clamp(5px, 3vw, 15px);">Dashboard</span></a>
+</li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+<!-- Divider -->
+<hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading" style="font-size: clamp(5px, 1vw, 22px); color:white;">
-                Menu Admin
-            </div>
+<!-- Heading -->
+<div class="sidebar-heading" style="font-size: clamp(5px, 1vw, 22px); color:white;">
+    Menu Kasir
+</div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" 15 aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-dollar-sign" style="font-size: clamp(5px, 3vw, 15px); color:white;"></i>
-                    <span style="font-size: clamp(5px, 3vw, 15px); color:white;">Oprasional</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" style="font-size: clamp(5px, 3vw, 15px);" href="VPengeluaran">Pengeluaran</a>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo1" 15 aria-expanded="true" aria-controls="collapseTwo1">
-                    <i class="fas fa-users" style="font-size: clamp(5px, 3vw, 15px); color:white;"></i>
-                    <span style="font-size: clamp(5px, 3vw, 15px); color:white;">Data SDK</span>
-                </a>
-                <div id="collapseTwo1" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" style="font-size: clamp(5px, 3vw, 15px);" href="VKaryawan">Data Karyawan</a>
-                        <a class="collapse-item" style="font-size: clamp(5px, 3vw, 15px);" href="VAccount">Akun Karyawan</a>
-                        <a class="collapse-item" style="font-size: clamp(5px, 3vw, 15px);" href="VTindakan">List Tindakan</a>
-                        <a class="collapse-item" style="font-size: clamp(5px, 3vw, 15px);" href="VObat">List Obat</a>
-                        <a class="collapse-item" style="font-size: clamp(5px, 3vw, 15px);" href="VAlatKesehatan">List Alat Kesehatan</a>
-                    </div>
-                </div>
-            </li>
+<!-- Nav Item - Pages Collapse Menu -->
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" 15 aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fa-solid fa-cash-register" style="font-size: clamp(5px, 3vw, 15px); color:white;"></i>
+        <span style="font-size: clamp(5px, 3vw, 15px); color:white;">Kasir</span>
+    </a>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+        <a class="collapse-item" style="font-size: clamp(5px, 3vw, 15px);" href="VPembayaran">Pembayaran</a>
+            <a class="collapse-item" style="font-size: clamp(5px, 3vw, 15px);" href="VDataPasien">Data Pasien</a>
+            <a class="collapse-item" style="font-size: clamp(5px, 3vw, 15px);" href="VAntrian">Antrian</a>
+        </div>
+    </div>
+</li>      
 
 
 
@@ -153,7 +158,7 @@ $table = mysqli_query($koneksi, "SELECT * FROM tindakan");
                         <i class="fa fa-bars"></i>
                     </button>
    
-                    <?php echo "<a href='VTindakan'><h5 class='text-center sm' style='color:white; margin-top: 8px; font-size: clamp(2px, 3vw, 22px);'>Data Tindakan</h5></a>"; ?>
+                    <?php echo "<a href='VDataPasien'><h5 class='text-center sm' style='color:white; margin-top: 8px; font-size: clamp(2px, 3vw, 22px);'>Data Pasien</h5></a>"; ?>
 
                    
                    
@@ -219,14 +224,14 @@ $table = mysqli_query($koneksi, "SELECT * FROM tindakan");
  <div class="col-md-2">
    <!-- Button Input Data Bayar -->
    <div align="right">
-     <button  style= "font-size: clamp(7px, 3vw, 15px); " type="button" class="btn btn-primary" data-toggle="modal" data-target="#input"> <i class="fas fa-plus-square mr-2"></i>Input Tindakan</button> <br> <br>
+     <button  style= "font-size: clamp(7px, 3vw, 15px); " type="button" class="btn btn-primary" data-toggle="modal" data-target="#input"> <i class="fas fa-plus-square mr-2"></i>Input Pasien</button> <br> <br>
    </div>
    <!-- Form Modal  -->
    <div class="modal fade bd-example-modal-lg" id="input" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role ="document">
       <div class="modal-content"> 
        <div class="modal-header">
-         <h5 class="modal-title"> Form Input Tindakan</h5>
+         <h5 class="modal-title"> Form Input Pasien</h5>
          <button type="button" class="close" data-dismiss="modal" aria-label="close">
            <span aria-hidden="true">&times;</span>
          </button>
@@ -234,22 +239,53 @@ $table = mysqli_query($koneksi, "SELECT * FROM tindakan");
 
        <!-- Form Input Data -->
        <div class="modal-body" align="left">
-         <?php  echo "<form action='../proses/PTambahTindakan' enctype='multipart/form-data' method='POST'>";  ?>
+         <?php  echo "<form action='../proses/PTambahPasien' enctype='multipart/form-data' method='POST'>";  ?>
 
          <br>
 
          <div class="row">
+           <div class="col-md-4">
+             <label>Nama Pasien</label>
+             <input class="form-control form-control-sm" type="text"  name="nama_pasien" required="">
+           </div>    
+           <div class="col-md-4">
+             <label>Tempat Lahir</label>
+             <input class="form-control form-control-sm" type="text"  name="tempat_lahir" required="">
+           </div>  
+           <div class="col-md-4">
+             <label>Tanggal Lahir</label>
+             <input class="form-control form-control-sm" type="date"  name="tanggal_lahir" required="">
+           </div>  
+         </div>
+          <br>
+          <div class="row">
            <div class="col-md-6">
-             <label>Nama Tindakan</label>
-             <input class="form-control form-control-sm" type="text"  name="nama_tindakan" required="">
+             <label>NIK</label>
+             <input class="form-control form-control-sm" type="text"  name="nik">
            </div>    
            <div class="col-md-6">
-             <label>Harga Tindakan</label>
-             <input class="form-control form-control-sm" type="nummber" name="harga_tindakan" required="">
+             <label>Golongan Darah</label>
+            <select name="golongan_darah" class="form-control form-control-sm">
+              <option></option>
+              <option>A</option>
+              <option>B</option>
+              <option>O</option>
+              <option>AB</option>
+            </select>
            </div>
          </div>
           <br>
-        
+         <div class="row">
+          <div class="col-md-6">
+              <label>No WA</label>
+              <input class="form-control form-control-sm" type="text" name="no_hp" >
+            </div>
+            <div class="col-md-6">
+              <label>Alamat</label>
+              <textarea  class="form-control form-control-sm"  name="alamat" ></textarea>
+            </div>
+            </div>
+        <br>
 
          <div class="modal-footer">
            <button type="submit" class="btn btn-primary">INPUT</button>
@@ -267,47 +303,70 @@ $table = mysqli_query($koneksi, "SELECT * FROM tindakan");
 </div>
 
 <!-- Tabel -->    
-<div style="overflow-x: auto">
+<div style="overflow-x: auto" >
 <table id="example" class="table-sm table-striped table-bordered  nowrap" style="width:auto" align="center">
 <thead>
  <tr>
-   <th style="font-size: clamp(12px, 1vw, 15px);">Kode Tindakan</th>
-   <th style="font-size: clamp(12px, 1vw, 15px);">Nama Tindakan</th>
-   <th style="font-size: clamp(12px, 1vw, 15px);">Harga Tindakan</th>
+   <th style="font-size: clamp(12px, 1vw, 15px);">ID Pasien</th>
+   <th style="font-size: clamp(12px, 1vw, 15px);">Nama Pasien</th>
+   <th style="font-size: clamp(12px, 1vw, 15px);">Tempat, Tanggal Lahir</th>
+   <th style="font-size: clamp(12px, 1vw, 15px);">Usia</th>
+   <th style="font-size: clamp(12px, 1vw, 15px);">Golongan Darah</th>
+   <th style="font-size: clamp(12px, 1vw, 15px);">NIK</th>
+   <th style="font-size: clamp(12px, 1vw, 15px);">Alamat</th>
+   <th style="font-size: clamp(12px, 1vw, 15px);">No HP/WA</th>
+   <th style="font-size: clamp(12px, 1vw, 15px);">Tgl Daftar</th>
    <th></th>
  </tr>
 </thead>
 <tbody>
-<?php
 
-function formatuang($angka)
-{
-    $uang = "Rp " . number_format($angka, 2, ',', '.');
-    return $uang;
-}
-
-?>
  <?php while($data = mysqli_fetch_array($table)){
-  $kode_tindakan = $data['kode_tindakan'];
-  $nama_tindakan = $data['nama_tindakan'];
-  $harga_tindakan =$data['harga_tindakan'];
+  $id_pasien = $data['id_pasien'];
+  $nama_pasien = $data['nama_pasien'];
+  $tempat_lahir =$data['tempat_lahir'];
+  $tanggal_lahir =$data['tanggal_lahir'];
+  $nik =$data['nik'];
+  $golongan_darah =$data['golongan_darah'];
+  $no_hp =$data['no_hp'];
+  $alamat =$data['alamat'];
+  $tgl_daftar =$data['tgl_daftar'];
 
+// tanggal lahir
+$tanggalx = new DateTime($tanggal_lahir);
+// tanggal hari ini
+$today = new DateTime('today');
+
+// tahun
+$y = $today->diff($tanggalx)->y;
+
+// bulan
+$m = $today->diff($tanggalx)->m;
+
+// hari
+$d = $today->diff($tanggalx)->d;
 
   echo "<tr>
-  <td style='font-size: clamp(12px, 1vw, 15px);' >$kode_tindakan</td>
-  <td style='font-size: clamp(12px, 1vw, 15px);' >$nama_tindakan</td>
-  <td  style='font-size: clamp(12px, 1vw, 15px);'>" ?> <?= formatuang($harga_tindakan); ?> <?php echo "</td>
+  <td style='font-size: clamp(12px, 1vw, 15px);' >$id_pasien</td>
+  <td style='font-size: clamp(12px, 1vw, 15px);' >$nama_pasien</td>
+  <td style='font-size: clamp(12px, 1vw, 15px);' >$tempat_lahir,";?> <?=  formattanggal($tanggal_lahir); ?> <?php echo" </td>
+  <td style='font-size: clamp(12px, 1vw, 15px);' >";?> <?php echo "".$y . " tahun " . $m . " bulan " . $d . " hari";?> <?php echo"</td>
+  <td style='font-size: clamp(12px, 1vw, 15px);' >$golongan_darah</td>
+  <td style='font-size: clamp(12px, 1vw, 15px);' >$nik</td>
+  <td style='font-size: clamp(12px, 1vw, 15px);' >$alamat</td>
+  <td style='font-size: clamp(12px, 1vw, 15px);' >$no_hp</td>
+  <td style='font-size: clamp(12px, 1vw, 15px);' >$tgl_daftar</td>
   "; ?>
   <?php echo "<td style='font-size: clamp(12px, 1vw, 15px);'>"; ?>
-  <button style= " font-size: clamp(7px, 1vw, 10px); color:black; " href="#" type="submit" class=" btn bg-warning mr-2 rounded" data-toggle="modal" data-target="#formedit<?php echo $data['kode_tindakan']; ?>" data-toggle='tooltip' title='Edit Data Tindakan'> 
+  <button style= " font-size: clamp(7px, 1vw, 10px); color:black; " href="#" type="submit" class=" btn bg-warning mr-2 rounded" data-toggle="modal" data-target="#formedit<?php echo $data['id_pasien']; ?>" data-toggle='tooltip' title='Edit Data Pasien'> 
   <i class="fas fa-edit"></i> Edit</button>
   <!-- Form EDIT DATA -->
 
-  <div class="modal fade" id="formedit<?php echo $data['kode_tindakan']; ?>" role="dialog" arialabelledby="modalLabel" aria-hidden="true">
+  <div class="modal fade" id="formedit<?php echo $data['id_pasien']; ?>" role="dialog" arialabelledby="modalLabel" aria-hidden="true">
    <div class="modal-dialog modal-lg" role ="document">
      <div class="modal-content"> 
        <div class="modal-header">
-         <h5 class="modal-title"> Edit Data Tindakan </h5>
+         <h5 class="modal-title"> Edit Data Pasien </h5>
          <button type="button" class="close" data-dismiss="modal" aria-label="close">
            <span aria-hidden="true"> &times; </span>
          </button>
@@ -315,26 +374,59 @@ function formatuang($angka)
 
        <!-- Form Edit Data -->
        <div class="modal-body">
-         <form action="../proses/EDataTindakan" enctype="multipart/form-data" method="POST">
+         <form action="../proses/EDataPasien" enctype="multipart/form-data" method="POST">
 
          <div class="row">
            <div class="col-md-6">
-             <label>Kode Tindakan</label>
-             <input class="form-control form-control-sm" type="text"  name="kode_tindakan" value="<?= $kode_tindakan; ?>" required="" disabled>
-             <input type="hidden" name="kode_tindakan" value="<?= $kode_tindakan; ?>">
+             <label>ID Pasien</label>
+             <input class="form-control form-control-sm" type="text"  name="id_pasien" value="<?= $id_pasien; ?>" required="" disabled>
+             <input type="hidden" name="id_pasien" value="<?= $id_pasien; ?>">
            </div>    
            <div class="col-md-6">
-             <label>Nama Tindakan</label>
-             <input class="form-control form-control-sm" type="text"  name="nama_tindakan"  value="<?= $nama_tindakan; ?>" required="">
+             <label>Nama Pasien</label>
+             <input class="form-control form-control-sm" type="text"  name="nama_pasien"  value="<?= $nama_pasien; ?>" required="">
+           </div>   
+         </div>
+          <br>
+          <div class="row">
+          <div class="col-md-6">
+             <label>Tempat Lahir</label>
+             <input class="form-control form-control-sm" type="text"  name="tempat_lahir" value="<?= $tempat_lahir; ?>"  required="">
+           </div>  
+           <div class="col-md-6">
+             <label>Tanggal Lahir</label>
+             <input class="form-control form-control-sm" type="date"  name="tanggal_lahir" value="<?= $tanggal_lahir; ?>" required="">
            </div>    
-           </div>
+         </div>
           <br>
          <div class="row">
           <div class="col-md-6">
-              <label>Harga Tindakan</label>
-              <input class="form-control form-control-sm" type="text" name="harga_tindakan"  value="<?= $harga_tindakan; ?>">
-            </div>
+             <label>NIK</label>
+             <input class="form-control form-control-sm" type="text"  name="nik" value="<?= $nik; ?>">
+           </div>    
+           <div class="col-md-6">
+             <label>Golongan Darah</label>
+             <?php $dataSelect = $data['golongan_darah']; ?>
+            <select name="golongan_darah" class="form-control form-control-sm">
+              <option></option>
+              <option <?php echo ($dataSelect == 'A') ? "selected": "" ?> >A</option>
+              <option <?php echo ($dataSelect == 'B') ? "selected": "" ?> >B</option>
+              <option <?php echo ($dataSelect == 'O') ? "selected": "" ?> >O</option>
+              <option <?php echo ($dataSelect == 'AB') ? "selected": "" ?> >AB</option>
+            </select>
+           </div>
          </div>
+          <br>
+         <div class="row">
+          <div class="col-md-6">
+              <label>No WA</label>
+              <input class="form-control form-control-sm" type="text" name="no_hp"  value="<?= $no_hp; ?>">
+            </div>
+            <div class="col-md-6">
+              <label>Alamat</label>
+              <textarea  class="form-control form-control-sm"  name="alamat" ><?= $alamat; ?></textarea>
+            </div>
+            </div>
         <br>
 
            <div class="modal-footer">
@@ -348,23 +440,23 @@ function formatuang($angka)
  </div>
 
  <!-- Button Hapus -->
- <button style= " font-size: clamp(7px, 1vw, 10px);color:black;" href="#" type="submit" class=" btn btn-danger" data-toggle="modal" data-target="#PopUpHapus<?php echo $data['kode_tindakan']; ?>" data-toggle='tooltip' title='Hapus Data Tindakan'>
+ <button style= " font-size: clamp(7px, 1vw, 10px);color:black;" href="#" type="submit" class=" btn btn-danger" data-toggle="modal" data-target="#PopUpHapus<?php echo $data['id_pasien']; ?>" data-toggle='tooltip' title='Hapus Data Pasien'>
  <i class="fa-solid fa-trash"></i> Hapus</button>
- <div class="modal fade" id="PopUpHapus<?php echo $data['kode_tindakan']; ?>" role="dialog" arialabelledby="modalLabel" aria-hidden="true">
+ <div class="modal fade" id="PopUpHapus<?php echo $data['id_pasien']; ?>" role="dialog" arialabelledby="modalLabel" aria-hidden="true">
   <div class="modal-dialog" role ="document">
     <div class="modal-content"> 
      <div class="modal-header">
-       <h4 class="modal-title"> <b> Hapus Data Tindakan </b> </h4>
+       <h4 class="modal-title"> <b> Hapus Data Pasien </b> </h4>
        <button type="button" class="close" data-dismiss="modal" aria-label="close">
          <span aria-hidden="true"> &times; </span>
        </button>
      </div>
 
      <div class="modal-body">
-       <form action="../proses/HDataTindakan" method="POST">
-         <input type="hidden" name="kode_tindakan" value="<?php echo $kode_tindakan ;?>">
+       <form action="../proses/HDataPasien" method="POST">
+         <input type="hidden" name="id_pasien" value="<?php echo $id_pasien ;?>">
          <div class="form-group">
-           <h6> Yakin Ingin Hapus Data <?php echo $data['nama_tindakan']; ?>? </h6>             
+           <h6> Yakin Ingin Hapus Data Pasien <?php echo $data['nama_pasien']; ?> </h6>             
          </div>
 
          <div class="modal-footer">
@@ -508,7 +600,10 @@ function formatuang($angka)
     liveSearch: true,
     maxOptions: 1
   });
+  
 </script>
+
+
 </body>
 
 </html>

@@ -135,7 +135,6 @@ else{
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" style="font-size: clamp(5px, 3vw, 15px);" href="VGajiKaryawan">Gaji Karyawan</a>
                         <a class="collapse-item" style="font-size: clamp(5px, 3vw, 15px);" href="VPengeluaran">Pengeluaran</a>
                     </div>
                 </div>
@@ -314,7 +313,7 @@ else{
 
 
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary"> CATAT</button>
+                                        <button type="submit" class="btn btn-primary"> INPUT</button>
                                         <button type="reset" class="btn btn-danger"> RESET</button>
                                     </div>
                                     </form>
@@ -398,7 +397,7 @@ else{
 
 
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary"> CATAT</button>
+                                        <button type="submit" class="btn btn-primary">UPDATE</button>
                                         <button type="reset" class="btn btn-danger"> RESET</button>
                                     </div>
                                     </form>

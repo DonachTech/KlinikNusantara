@@ -102,7 +102,6 @@ $table = mysqli_query($koneksi, "SELECT * FROM karyawan a INNER JOIN account b o
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" style="font-size: clamp(5px, 3vw, 15px);" href="VGajiKaryawan">Gaji Karyawan</a>
                         <a class="collapse-item" style="font-size: clamp(5px, 3vw, 15px);" href="VPengeluaran">Pengeluaran</a>
                     </div>
                 </div>
@@ -254,11 +253,20 @@ $table = mysqli_query($koneksi, "SELECT * FROM karyawan a INNER JOIN account b o
             $result = mysqli_query($koneksi, "SELECT nama_karyawan FROM karyawan");   
             while ($data2 = mysqli_fetch_array($result)){
               $nama_karyawan = $data2['nama_karyawan'];
+              $result2 = mysqli_query($koneksi, "SELECT nama_karyawan, username FROM karyawan a INNER JOIN account b on b.id_karyawan=a.id_karyawan WHERE nama_karyawan = '$nama_karyawan'");   
+              $data3 = mysqli_fetch_array($result2);
+              $nama_karyawanx = $data3['nama_karyawan'];
 
+  
+              if($nama_karyawanx == $nama_karyawan){
 
-              echo "<option> $nama_karyawan </option> ";
-              
-            }
+              }
+              else{
+                echo "<option> $nama_karyawan </option> ";
+              }
+                
+             
+               }
             ?>
           </select>
            </div>
@@ -287,7 +295,7 @@ $table = mysqli_query($koneksi, "SELECT * FROM karyawan a INNER JOIN account b o
         <br>
 
          <div class="modal-footer">
-           <button type="submit" class="btn btn-primary"> CATAT</button>
+           <button type="submit" class="btn btn-primary"> BUAT</button>
            <button type="reset" class="btn btn-danger"> RESET</button>
          </div>
        </form>

@@ -63,7 +63,7 @@ $password2 = htmlspecialchars($_POST['password2']);
       $data_karyawan = mysqli_fetch_assoc($sql_karyawan);
       $id_karyawan = $data_karyawan['id_karyawan'];
       $jabatan = $data_karyawan['jabatan'];
-      $password = password_hash($password, PASSWORD_DEFAULT);
+      $password = password_hash($password1, PASSWORD_DEFAULT);
       $query = mysqli_query ($koneksi,"INSERT INTO account VALUES('$username','$password','$id_karyawan')");
       
       if ($query!= "") {

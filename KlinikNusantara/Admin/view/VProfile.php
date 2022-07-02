@@ -142,7 +142,6 @@ $username = htmlspecialchars($data1['username']);
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" style="font-size: clamp(5px, 3vw, 15px);" href="VGajiKaryawan">Gaji Karyawan</a>
                         <a class="collapse-item" style="font-size: clamp(5px, 3vw, 15px);" href="VPengeluaran">Pengeluaran</a>
                     </div>
                 </div>

@@ -9,6 +9,12 @@
 /KlinikNusantara/Admin/view/logout.php
 /KlinikNusantara/Admin/proses/koneksi.php
 /KlinikNusantara/Admin/proses/logout.php
-/KlinikNusantara/Kasir/file_kasir_pbj
+/KlinikNusantara/Admin/file_admin
+
+/KlinikNusantara/Kasir/view/koneksi.php
+/KlinikNusantara/Kasir/view/logout.php
+/KlinikNusantara/Kasir/proses/koneksi.php
+/KlinikNusantara/Kasir/proses/logout.php
+/KlinikNusantara/Kasir/file_admin
 
 

@@ -10,7 +10,7 @@ $result1 = mysqli_query($koneksi, "SELECT * FROM account a INNER JOIN karyawan b
 $data1 = mysqli_fetch_array($result1);
 $id1 = $data1['id_karyawan'];
 $jabatan_valid = $data1['jabatan'];
-if ($jabatan_valid == 'Admin') {
+if ($jabatan_valid == 'Kasir') {
 } else {
     header("Location: logout.php");
     exit;
@@ -33,7 +33,7 @@ $foto_profile = $data['foto_profile'];
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dashboard Admin</title>
+    <title>Dashboard Kasir</title>
 
     <!-- Custom fonts for this template-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet" type="text/css">
@@ -112,7 +112,7 @@ $foto_profile = $data['foto_profile'];
          <ul class="navbar-nav  sidebar sidebar-dark accordion" style=" background-color: #300030" id="accordionSidebar">
 
 <!-- Sidebar - Brand -->
-<a class="sidebar-brand d-flex align-items-center justify-content-center" href="DsAdmin">
+<a class="sidebar-brand d-flex align-items-center justify-content-center" href="DsKasir">
     <div class="sidebar-brand-icon rotate-n-15">
 
     </div>
@@ -126,7 +126,7 @@ $foto_profile = $data['foto_profile'];
 
 <!-- Nav Item - Dashboard -->
 <li class="nav-item active">
-    <a class="nav-link" href="DsAdmin">
+    <a class="nav-link" href="DsKasir">
         <i class="fas fa-fw fa-tachometer-alt" style="font-size: clamp(5px, 3vw, 15px);"></i>
         <span style="font-size: clamp(5px, 3vw, 15px);">Dashboard</span></a>
 </li>
@@ -136,38 +136,23 @@ $foto_profile = $data['foto_profile'];
 
 <!-- Heading -->
 <div class="sidebar-heading" style="font-size: clamp(5px, 1vw, 22px); color:white;">
-    Menu Admin
+    Menu Kasir
 </div>
 
 <!-- Nav Item - Pages Collapse Menu -->
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" 15 aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-dollar-sign" style="font-size: clamp(5px, 3vw, 15px); color:white;"></i>
-        <span style="font-size: clamp(5px, 3vw, 15px); color:white;">Oprasional</span>
+        <i class="fa-solid fa-cash-register" style="font-size: clamp(5px, 3vw, 15px); color:white;"></i>
+        <span style="font-size: clamp(5px, 3vw, 15px); color:white;">Kasir</span>
     </a>
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" style="font-size: clamp(5px, 3vw, 15px);" href="VPengeluaran">Pengeluaran</a>
+        <a class="collapse-item" style="font-size: clamp(5px, 3vw, 15px);" href="VPembayaran">Pembayaran</a>
+            <a class="collapse-item" style="font-size: clamp(5px, 3vw, 15px);" href="VDataPasien">Data Pasien</a>
+            <a class="collapse-item" style="font-size: clamp(5px, 3vw, 15px);" href="VAntrian">Antrian</a>
         </div>
     </div>
 </li>
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo1" 15 aria-expanded="true" aria-controls="collapseTwo1">
-        <i class="fas fa-users" style="font-size: clamp(5px, 3vw, 15px); color:white;"></i>
-        <span style="font-size: clamp(5px, 3vw, 15px); color:white;">Data SDK</span>
-    </a>
-    <div id="collapseTwo1" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" style="font-size: clamp(5px, 3vw, 15px);" href="VKaryawan">Data Karyawan</a>
-            <a class="collapse-item" style="font-size: clamp(5px, 3vw, 15px);" href="VAccount">Akun Karyawan</a>
-            <a class="collapse-item" style="font-size: clamp(5px, 3vw, 15px);" href="VTindakan">List Tindakan</a>
-            <a class="collapse-item" style="font-size: clamp(5px, 3vw, 15px);" href="VObat">List Obat</a>
-            <a class="collapse-item" style="font-size: clamp(5px, 3vw, 15px);" href="VAlatKesehatan">List Alat Kesehatan</a>
-        </div>
-    </div>
-</li>
-
-
 
             <!-- Divider -->
             <hr class="sidebar-divider">
